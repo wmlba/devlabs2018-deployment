@@ -45,10 +45,13 @@ def lambda_handler(event, context):
     result = client.invoke(
     FunctionName='<prediction function placed here>',
     InvocationType='RequestResponse')
-    results_dict = ast.literal_eval(result['Payload'].read())
+    results_dict = ast.literal_eval(json.loads(result['Payload'].read()))
+    prob = "{0:.2f}".format(results_dict.get('prob') * 100)
+    msg = "There is %" + str(prob) + " chance that the picture is " + results_dict.get('label')[0]
+    print(msg)
     response = {
         'statusCode': 200,
-        'body': results_dict
+        'body': json.dumps(msg)
     }
     return response
     
