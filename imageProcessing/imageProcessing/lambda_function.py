@@ -10,7 +10,7 @@ print('Loading function')
 
 client = boto3.client('lambda')
 s3 = boto3.resource('s3')
-bucket="afterresize"
+bucket="sagemaker-demo-sydsummit"
 
 def upload_to_s3(channel, file, file_name):
     s3 = boto3.resource('s3')
