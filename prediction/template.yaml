@@ -10,12 +10,6 @@ Resources:
       Description: ''
       MemorySize: 1024
       Timeout: 15
-      Events:
-        LambdaMicroservice:
-          Type: Api
-          Properties:
-            Path: /
-            Method: ANY
       Role: 'arn:aws:iam::599334232150:role/SydneySummit-PredictionLambda'
   predictionPermission:
     Type: 'AWS::Lambda::Permission'
