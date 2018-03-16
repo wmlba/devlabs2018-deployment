@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import json
+import ast
 import cv2
 import boto3
 import numpy as np
@@ -43,11 +44,11 @@ def lambda_handler(event, context):
     upload_to_s3('temp','/tmp/img_numpy.json','img_numpy.json')
     result = client.invoke(
     FunctionName='<prediction function placed here>',
-    InvocationType='RequestResponse',
-    Payload=json.dumps(payload2))
+    InvocationType='RequestResponse')
+    results_dict = ast.literal_eval(result['Payload'].read())
     response = {
         'statusCode': 200,
-        'body': json.dumps(result['Payload'].read())
+        'body': results_dict
     }
     return response
     
