@@ -16,6 +16,7 @@ Resources:
           Properties:
             Path: /
             Method: ANY
+      Role: 'arn:aws:iam::599334232150:role/SydneySummit-ImageProcessing-Lambda'
   imageProcessingPermission:
     Type: 'AWS::Lambda::Permission'
     Properties:
