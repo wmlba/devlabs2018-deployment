@@ -42,7 +42,7 @@ def lambda_handler(event, context):
         json.dump(payload, outfile)
     upload_to_s3('temp','/tmp/img_numpy.json','img_numpy.json')
     result = client.invoke(
-    FunctionName='cloud9-prediction-prediction-PNK366M24FQK',
+    FunctionName='<prediction function placed here>',
     InvocationType='RequestResponse',
     Payload=json.dumps(payload2))
     response = {
