@@ -38,7 +38,6 @@ def lambda_handler(event, context):
     urllib.urlretrieve(url,file_path)
     img = get_image(file_path)
     payload = { "object": img.tolist() }
-    payload2 = { "object": "image" }
     with open('/tmp/img_numpy.json', 'w') as outfile:
         json.dump(payload, outfile)
     upload_to_s3('temp','/tmp/img_numpy.json','img_numpy.json')
@@ -48,10 +47,10 @@ def lambda_handler(event, context):
     results_dict = ast.literal_eval(json.loads(result['Payload'].read()))
     prob = "{0:.2f}".format(results_dict.get('prob') * 100)
     msg = "There is %" + str(prob) + " chance that the picture is " + results_dict.get('label')[0]
-    print(msg)
+    html_body = '<html><body><h2>' + msg + ' </h2><img src="' + url +  '" alt="flower" width="500" height="377"></body></html>'
     response = {
         'statusCode': 200,
-        'body': json.dumps(msg)
+        'body': html_body
     }
     return response
     
