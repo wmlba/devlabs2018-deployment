@@ -7,7 +7,7 @@ import boto3
 from collections import namedtuple
 Batch = namedtuple('Batch', ['data'])
 
-sym, arg_params, aux_params = mx.model.load_checkpoint('102flowers', 10)
+sym, arg_params, aux_params = mx.model.load_checkpoint('102flowers', 5)
 mod = mx.mod.Module(symbol=sym, context=mx.cpu(), label_names=None)
 mod.bind(for_training=False, data_shapes=[('data', (1,3,224,224))], 
          label_shapes=mod._label_shapes)
